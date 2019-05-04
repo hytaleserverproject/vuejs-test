@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Dev Version of Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <div id="app2">
+        <span v-bind:title="message">
+            Hoever your mouse over me for a few seconds
+            to see my dynamically-bound title!
+        </span>
+    </div>
+
+    <div id="app3">
+        <span v-if="seen">Now you see me</span>
+    </div>
+
+    <div id="app4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse the Message</button>
+    </div>
+
+    <div id="app6">
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+
+    <script type="text/javascript">
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello there'
+            }
+        })
+
+        let app2 = new Vue({
+            el: '#app2',
+            data: {
+                message: 'You loaded this page on' + ` ${new Date().toLocaleString()}` // Note the string literal-ness of ES6
+            }
+        })
+
+        let app3 = new Vue({
+            el: '#app3',
+            data: {
+                seen: true // Change this to false to see the text in div#app3 disappear.
+            }
+        })
+
+        let app4 = new Vue({
+                el: '#app4',
+                data: {
+                    todos: [{
+                        text: 'Learn JavaScript'
+                    }, {
+                        text: 'Learn Vue'
+                    }, {
+                        text: 'Build something awesome'
+                    }]
+                }
+            }) // enter app4.todos.push ({ text: 'New Item' }) to add a new item to the list
+
+        let app5 = new Vue({
+            el: '#app5',
+            data: {
+                message: 'This is Vue.js'
+            },
+            methods: {
+                reverseMessage: function() {
+                    this.message = this.message.split("").reverse().join("")
+                }
+            }
+        })
+
+        let app6 = new Vue({
+                el: '#app6',
+                data: {
+                    message: 'Hello Vue!'
+                }
+            }) // This will dynamically update the p element to the value in the text box
+    </script>
+</body>
+
+</html>
